@@ -35,10 +35,10 @@ def post_process(text):
     return " ".join(newtext)
 
 def extract_text_with_position(fname, page_n, image, max_x, max_y, x, y, x2, y2):
-    x, y, w, h = x / image.shape[1], y/image.shape[0], w/image.shape[1], h/image.shape[0]
+    x, y, x2, y2 = x / image.shape[1], y/image.shape[0], x2/image.shape[1], y2/image.shape[0]
     for n, page in enumerate(fitz.open(fname)):
 
-        if (n==page_n): 
+        if (n==int(page_n)): 
             text = page.get_textbox([max_x * x, max_y * y, max_x * x2, max_y * y2])
-            text = post_process(text.replace('-', ''))
+            text = post_process(text.replace('-', ''))          
             return text
